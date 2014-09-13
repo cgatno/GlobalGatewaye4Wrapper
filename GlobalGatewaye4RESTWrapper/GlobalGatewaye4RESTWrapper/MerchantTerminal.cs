@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace GlobalGatewaye4RESTWrapper
 {
-    class MerchantTerminal
+    public class MerchantTerminal
     {
         private readonly string mGatewayID;
         private readonly string mTerminalPassword;
