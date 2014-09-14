@@ -21,9 +21,7 @@ namespace GlobalGatewaye4RESTWrapper
         private const string TRANSACTION_TAG_TAG = "Transaction_Tag";
         private const string AUTHORIZATION_NUMBER_TAG = "Authorization_Num";
         private const string SEQUENCE_NUMBER_TAG = "SequenceNo";
-        // TODO: AVS response code class
         private const string AVS_RESPONSE_TAG = "AVS";
-        // TODO: CVV2 response code class
         private const string CVV2_RESPONSE_TAG = "CVV2";
         private const string AVS_RETRIEVAL_REFERENCE_NUMBER_TAG = "Retrieval_Ref_No";
         private const string MERCHANT_NAME_TAG = "MerchantName";
@@ -48,8 +46,8 @@ namespace GlobalGatewaye4RESTWrapper
         public readonly string TransactionTag;
         public readonly string AuthorizationNumber;
         public readonly string SequenceNumber;
-        public readonly string AVSResponse;
-        public readonly string CVV2Response;
+        public readonly AVSResponseCode AVSResponse;
+        public readonly CVV2ResponseCode CVV2Response;
         public readonly string AVSRetrievalReferenceNumber;
         public readonly string MerchantName;
         public readonly string MerchantAddress;
@@ -105,10 +103,10 @@ namespace GlobalGatewaye4RESTWrapper
                                     SequenceNumber = reader.ReadElementContentAsString();
                                     break;
                                 case AVS_RESPONSE_TAG:
-                                    AVSResponse = reader.ReadElementContentAsString();
+                                    AVSResponse = new AVSResponseCode(reader.ReadElementContentAsString());
                                     break;
                                 case CVV2_RESPONSE_TAG:
-                                    CVV2Response = reader.ReadElementContentAsString();
+                                    CVV2Response = new CVV2ResponseCode(reader.ReadElementContentAsString());
                                     break;
                                 case AVS_RETRIEVAL_REFERENCE_NUMBER_TAG:
                                     AVSRetrievalReferenceNumber = reader.ReadElementContentAsString();
@@ -145,11 +143,108 @@ namespace GlobalGatewaye4RESTWrapper
                                     break;
                             }
                         }
-                        catch (Exception ex)
+                        catch
                         {
+                            // Do nothing on errors for now - just continue the loop
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public sealed class AVSResponseCode
+    {
+        public readonly string value;
+
+        public AVSResponseCode(string value)
+        {
+            this.value = value;
+        }
+
+        public override string ToString()
+        {
+            switch (value)
+            {
+                case "X":
+                    return "Exact match, 9 digit ZIP";
+                case "Y":
+                    return "Exact match, 5 digit ZIP";
+                case "A":
+                    return "Address match only";
+                case "W":
+                    return "9 digit ZIP match only";
+                case "Z":
+                    return "5 digit ZIP match only";
+                case "N":
+                    return "No address or ZIP match";
+                case "U":
+                    return "Address unavailable";
+                case "G":
+                    return "Non-North American issuer, does not participate";
+                case "R":
+                    return "Issuer system not available";
+                case "E":
+                    return "Not a mail/phone order";
+                case "S":
+                    return "Service not supported";
+                case "Q":
+                    return "Bill to address did not pass edit checks";
+                case "D":
+                    return "International street address and postal code match";
+                case "B":
+                    return "International street address match, postal code not verified due to incompatible format";
+                case "C":
+                    return "International street address and postal code not verified due to incompatible format";
+                case "P":
+                    return "International postal code match, street address not verified due to incompatible format";
+                case "1":
+                    return "Cardholder name matches";
+                case "2":
+                    return "Cardholder name, billing address, and postal code match";
+                case "3":
+                    return "Cardholder name and billing postal code match";
+                case "4":
+                    return "Cardholder name and billing address match";
+                case "5":
+                    return "Cardholder name incorrect, billing address and postal code match";
+                case "6":
+                    return "Cardholder name incorrect, billing postal code matches";
+                case "7":
+                    return "Cardholder name incorrect, billing address matches";
+                case "8":
+                    return "Cardholder name, billing address, and postal code are all incorrect";
+                default:
+                    return "Unknown response code";
+            }
+        }
+    }
+
+    public sealed class CVV2ResponseCode
+    {
+        public readonly string value;
+        
+        public CVV2ResponseCode(string value)
+        {
+            this.value = value;
+        }
+
+        public override string ToString()
+        {
+            switch (value)
+            {
+                case "M":
+                    return "CVV2/CVC2/CVD Match";
+                case "N":
+                    return "CVV2/CVC2/CVD No match";
+                case "P":
+                    return "Not processed";
+                case "S":
+                    return "Merchant has indicated that CVV2/CVC2/CVD is not present on card";
+                case "U":
+                    return "Issuer is not certified and/or has not provided Visa encryption keys";
+                default:
+                    return "Unknown response code";
             }
         }
     }
