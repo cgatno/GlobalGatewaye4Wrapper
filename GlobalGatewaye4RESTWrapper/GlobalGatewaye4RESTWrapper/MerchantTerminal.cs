@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace GlobalGatewaye4RESTWrapper
 {
@@ -52,12 +53,13 @@ namespace GlobalGatewaye4RESTWrapper
             const string TRANSACTION_TAG = "Transaction";
             StringBuilder outputBuilder = new StringBuilder();
             XmlWriterSettings settings = new XmlWriterSettings
-                {
-                    Encoding = Encoding.UTF8
-                };
+            {
+                Indent = true,
+                ConformanceLevel = ConformanceLevel.Fragment,
+                OmitXmlDeclaration = true
+            };
             using (XmlWriter writer = XmlWriter.Create(outputBuilder, settings))
             {
-                writer.WriteStartDocument();
                 writer.WriteStartElement(TRANSACTION_TAG);
                 WriteMerchantXMLBlob(writer);
                 Transaction.WriteTransactionXMLBlob(writer);
@@ -88,7 +90,7 @@ namespace GlobalGatewaye4RESTWrapper
             // Generate the web request
             HttpWebRequest gatewayRequest = (HttpWebRequest)WebRequest.Create(endpointURL);
             gatewayRequest.Method = REQUEST_METHOD;
-            gatewayRequest.Method = REQUEST_TYPE;
+            gatewayRequest.ContentType = REQUEST_TYPE;
             gatewayRequest.Accept = "*/*";
             gatewayRequest.Headers.Add("x-gge4-date", mLastTransactionUTCTimestamp.ToString(TIMESTAMP_FORMAT_STRING));
             gatewayRequest.Headers.Add("x-gge4-content-sha1", XMLHashed);

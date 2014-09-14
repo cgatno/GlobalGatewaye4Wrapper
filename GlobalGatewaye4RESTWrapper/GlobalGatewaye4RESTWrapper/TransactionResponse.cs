@@ -70,77 +70,83 @@ namespace GlobalGatewaye4RESTWrapper
                 {
                     if (reader.NodeType == XmlNodeType.Element)
                     {
-                        switch (reader.Name)
+                        try
                         {
-                            case TRANSACTION_ERROR_TAG:
-                                TransactionError = reader.ReadElementContentAsBoolean();
-                                break;
-                            case TRANSACTION_APPROVED_TAG:
-                                TransactionApproved = reader.ReadElementContentAsBoolean();
-                                break;
-                            case EXACT_RESPONSE_CODE_TAG:
-                                ExactResponseCode = reader.ReadElementContentAsString();
-                                break;
-                            case EXACT_MESSAGE_TAG:
-                                ExactMessage = reader.ReadElementContentAsString();
-                                break;
-                            case BANK_RESPONSE_CODE_TAG:
-                                BankResponseCode = reader.ReadElementContentAsString();
-                                break;
-                            case BANK_MESSAGE_TAG:
-                                BankMessage = reader.ReadElementContentAsString();
-                                break;
-                            case BANK_RESPONSE_CODE_2_TAG:
-                                BankResponseCode2 = reader.ReadElementContentAsString();
-                                break;
-                            case TRANSACTION_TAG_TAG:
-                                TransactionTag = reader.ReadElementContentAsString();
-                                break;
-                            case AUTHORIZATION_NUMBER_TAG:
-                                AuthorizationNumber = reader.ReadElementContentAsString();
-                                break;
-                            case SEQUENCE_NUMBER_TAG:
-                                SequenceNumber = reader.ReadElementContentAsString();
-                                break;
-                            case AVS_RESPONSE_TAG:
-                                AVSResponse = reader.ReadElementContentAsString();
-                                break;
-                            case CVV2_RESPONSE_TAG:
-                                CVV2Response = reader.ReadElementContentAsString();
-                                break;
-                            case AVS_RETRIEVAL_REFERENCE_NUMBER_TAG:
-                                AVSRetrievalReferenceNumber = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_NAME_TAG:
-                                MerchantName = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_ADDRESS_TAG:
-                                MerchantAddress = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_CITY_TAG:
-                                MerchantCity = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_STATE_TAG:
-                                MerchantState = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_COUNTRY_TAG:
-                                MerchantCountry = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_ZIP_CODE_TAG:
-                                MerchantZipCode = reader.ReadElementContentAsString();
-                                break;
-                            case MERCHANT_URL_TAG:
-                                MerchantURL = reader.ReadElementContentAsString();
-                                break;
-                            case CUSTOMER_TRANSACTION_RECORD_TAG:
-                                CustomerTransactionRecord = reader.ReadElementContentAsString();
-                                break;
-                            case CURRENT_BALANCE_TAG:
-                                CurrentBalance = reader.ReadElementContentAsDecimal();
-                                break;
-                            case PREVIOUS_BALANCE_TAG:
-                                PreviousBalance = reader.ReadElementContentAsDecimal();
-                                break;
+                            switch (reader.Name)
+                            {
+                                case TRANSACTION_ERROR_TAG:
+                                    TransactionError = reader.ReadElementContentAsBoolean();
+                                    break;
+                                case TRANSACTION_APPROVED_TAG:
+                                    TransactionApproved = reader.ReadElementContentAsBoolean();
+                                    break;
+                                case EXACT_RESPONSE_CODE_TAG:
+                                    ExactResponseCode = reader.ReadElementContentAsString();
+                                    break;
+                                case EXACT_MESSAGE_TAG:
+                                    ExactMessage = reader.ReadElementContentAsString();
+                                    break;
+                                case BANK_RESPONSE_CODE_TAG:
+                                    BankResponseCode = reader.ReadElementContentAsString();
+                                    break;
+                                case BANK_MESSAGE_TAG:
+                                    BankMessage = reader.ReadElementContentAsString();
+                                    break;
+                                case BANK_RESPONSE_CODE_2_TAG:
+                                    BankResponseCode2 = reader.ReadElementContentAsString();
+                                    break;
+                                case TRANSACTION_TAG_TAG:
+                                    TransactionTag = reader.ReadElementContentAsString();
+                                    break;
+                                case AUTHORIZATION_NUMBER_TAG:
+                                    AuthorizationNumber = reader.ReadElementContentAsString();
+                                    break;
+                                case SEQUENCE_NUMBER_TAG:
+                                    SequenceNumber = reader.ReadElementContentAsString();
+                                    break;
+                                case AVS_RESPONSE_TAG:
+                                    AVSResponse = reader.ReadElementContentAsString();
+                                    break;
+                                case CVV2_RESPONSE_TAG:
+                                    CVV2Response = reader.ReadElementContentAsString();
+                                    break;
+                                case AVS_RETRIEVAL_REFERENCE_NUMBER_TAG:
+                                    AVSRetrievalReferenceNumber = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_NAME_TAG:
+                                    MerchantName = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_ADDRESS_TAG:
+                                    MerchantAddress = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_CITY_TAG:
+                                    MerchantCity = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_STATE_TAG:
+                                    MerchantState = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_COUNTRY_TAG:
+                                    MerchantCountry = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_ZIP_CODE_TAG:
+                                    MerchantZipCode = reader.ReadElementContentAsString();
+                                    break;
+                                case MERCHANT_URL_TAG:
+                                    MerchantURL = reader.ReadElementContentAsString();
+                                    break;
+                                case CUSTOMER_TRANSACTION_RECORD_TAG:
+                                    CustomerTransactionRecord = reader.ReadElementContentAsString();
+                                    break;
+                                case CURRENT_BALANCE_TAG:
+                                    CurrentBalance = reader.ReadElementContentAsDecimal();
+                                    break;
+                                case PREVIOUS_BALANCE_TAG:
+                                    PreviousBalance = reader.ReadElementContentAsDecimal();
+                                    break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
                         }
                     }
                 }

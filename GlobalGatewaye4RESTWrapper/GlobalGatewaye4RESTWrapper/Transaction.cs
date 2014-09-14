@@ -194,9 +194,9 @@ namespace GlobalGatewaye4RESTWrapper
             writer.WriteElementString(REFERENCE_NUMBER_TAG, ReferenceNumber);
             if (!string.IsNullOrWhiteSpace(ZipCode)) writer.WriteElementString(ZIP_CODE_TAG, ZipCode);
             writer.WriteElementString(TAX_1_AMOUNT, Tax1Amount.ToString());
-            writer.WriteElementString(TAX_1_NUMBER, Tax1Number.ToString());
+            if (!string.IsNullOrWhiteSpace(Tax1Number)) writer.WriteElementString(TAX_1_NUMBER, Tax1Number);
             writer.WriteElementString(TAX_2_AMOUNT, Tax2Amount.ToString());
-            writer.WriteElementString(TAX_2_NUMBER, Tax2Number.ToString());
+            if (!string.IsNullOrWhiteSpace(Tax2Number)) writer.WriteElementString(TAX_2_NUMBER, Tax2Number);
             writer.WriteElementString(CUSTOMER_REFERENCE_TAG, CustomerReference);
             if (!string.IsNullOrWhiteSpace(Reference3)) writer.WriteElementString(REFERENCE_3_TAG, Reference3);
             if (ClientIPAddress != null) writer.WriteElementString(CLIENT_IP_ADDRESS_TAG, ClientIPAddress.ToString());
