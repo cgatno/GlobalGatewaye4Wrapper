@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.XPath;
 
 namespace GlobalGatewaye4RESTWrapper
 {
